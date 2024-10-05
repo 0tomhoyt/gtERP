@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <link rel="stylesheet" href="/css/test.css">
+</head>
+<body>
+<div class="container">
+  <h1>合同信息</h1>
+  <div class="form-section">
+    <label for="contract-number">合同号:</label>
+    <input type="text" id="contract-number" value="H2409141" disabled>
+
+    <label for="salesman">业务员:</label>
+    <select id="salesman">
+      <option value="1">业务员1</option>
+      <option value="2">业务员2</option>
+    </select>
+
+    <label for="customer-name">客户名称:</label>
+    <input type="text" id="customer-name">
+
+    <label for="contact-person">联系人:</label>
+    <input type="text" id="contact-person">
+
+    <!-- Add other input fields following the same pattern -->
+
+  </div>
+
+  <h2>印件规格</h2>
+  <div class="form-section">
+    <label for="print-name">印件名称:</label>
+    <input type="text" id="print-name">
+
+    <label for="product-size">成品尺寸:</label>
+    <input type="text" id="product-size">
+
+    <label for="pages">页数:</label>
+    <input type="number" id="pages">
+
+    <!-- Add other input fields following the same pattern -->
+
+  </div>
+
+  <h2>费用支付</h2>
+  <div class="form-section">
+    <label for="total-price">总价:</label>
+    <input type="text" id="total-price">
+
+    <label for="payment-date">结清日期:</label>
+    <input type="date" id="payment-date">
+  </div>
+
+  <button id="save-button">保存</button>
+  <button id="exit-button">退出</button>
+</div>
+
+<script src="/js/test.js"></script>
+</body>
+</html>
