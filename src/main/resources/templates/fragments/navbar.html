@@ -1,0 +1,14 @@
+<!-- templates/fragments/navbar.html -->
+<nav th:fragment="navbar">
+  <div class="navbar">
+    <!-- 图标，点击返回首页 -->
+    <a th:href="@{/}" class="logo">
+      <!-- 使用图标或 Logo 图片 -->
+      <img th:src="@{/images/gt_logo.png}" alt="Logo" />
+    </a>
+    <!-- 导航链接 -->
+    <div class="nav-links">
+      <a th:href="@{/user/new}" class="btn">创建新用户</a>
+    </div>
+  </div>
+</nav>

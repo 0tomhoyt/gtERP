@@ -3,8 +3,11 @@
 <head>
   <title>管理用户</title>
   <link rel="stylesheet" th:href="@{/css/manage-users.css}">
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
 </head>
 <body>
+<!-- 包含导航栏 -->
+<div th:insert="fragments/navbar :: navbar"></div>
 <div th:if="${message}" class="alert alert-success">
   <p th:text="${message}"></p>
 </div>

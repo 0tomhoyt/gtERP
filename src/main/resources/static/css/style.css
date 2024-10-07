@@ -5,11 +5,26 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    /* 移除了 display: flex; 及相关属性 */
 }
+
+/* 主要内容容器 */
+.container {
+    display: flex; /* 将 Flex 布局应用到容器上 */
+    flex-direction: column; /* 垂直排列子元素 */
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
+    min-height: calc(100vh - 60px); /* 减去导航栏的高度 */
+    text-align: center;
+    background-color: white;
+    padding: 30px;
+    margin: 0 auto; /* 水平居中 */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 400px; /* 设置表单宽度 */
+}
+
+
 
 /* 头部样式 */
 h1 {
@@ -19,15 +34,6 @@ h1 {
     font-size: 2.5rem;
 }
 
-/* 主要内容容器 */
-.container {
-    text-align: center;
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 400px; /* 设置表单宽度 */
-}
 
 /* 表单标签样式 */
 label {

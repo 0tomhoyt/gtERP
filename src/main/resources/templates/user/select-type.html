@@ -4,8 +4,12 @@
     <title>选择用户类型</title>
     <!-- 引入CSS文件 -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
 </head>
 <body>
+<!-- 包含导航栏 -->
+<div th:insert="fragments/navbar :: navbar"></div>
+
 <div class="container">
     <h1>请选择要创建的用户类型</h1>
 

@@ -5,8 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home Page</title>
   <link rel="stylesheet" href="/css/test.css">
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
 </head>
 <body>
+<!-- 包含导航栏 -->
+<div th:insert="fragments/navbar :: navbar"></div>
+
 <div class="container">
   <h1>合同信息</h1>
   <div class="form-section">

@@ -1,0 +1,28 @@
+/* 导航栏样式 */
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: #e69500;
+    padding: 10px 20px;
+}
+
+.navbar .logo img {
+    height: 40px;
+}
+
+.navbar .nav-links {
+    margin-left: auto;
+}
+
+.navbar .nav-links .btn {
+    background-color: #FFA500;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .nav-links .btn:hover {
+    background-color: #e69500;
+}
