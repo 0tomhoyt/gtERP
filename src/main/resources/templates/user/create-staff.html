@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>创建员工</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+  <h1>创建新员工</h1>
+  <form th:action="@{/user/new/staff}" th:object="${staff}" method="post">
+    <label>用户名:</label>
+    <input type="text" th:field="*{username}" required /><br/>
+
+    <label>密码:</label>
+    <input type="password" th:field="*{password}" required /><br/>
+
+    <label>昵称:</label>
+    <input type="text" th:field="*{nickName}" /><br/>
+
+    <label>邮箱:</label>
+    <input type="email" th:field="*{email}" /><br/>
+
+    <label>电话号码:</label>
+    <input type="text" th:field="*{phoneNumber}" /><br/>
+
+    <label>角色:</label>
+    <input type="text" th:field="*{role}" /><br/>
+
+    <button type="submit">创建员工</button>
+  </form>
+</div>
+</body>
+</html>

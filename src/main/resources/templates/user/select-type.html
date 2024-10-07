@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>选择用户类型</title>
+    <!-- 引入CSS文件 -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>请选择要创建的用户类型</h1>
+
+    <a href="/user/new/staff"><button>创建员工</button></a>
+    <a href="/user/new/client"><button>创建客户</button></a>
+</div>
+</body>
+</html>

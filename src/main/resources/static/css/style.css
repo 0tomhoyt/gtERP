@@ -1,0 +1,72 @@
+/* 全局样式，设置页面字体和背景 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 头部样式 */
+h1 {
+    text-align: center;
+    color: #FFA500; /* 标题颜色改为亮橙色 */
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+/* 主要内容容器 */
+.container {
+    text-align: center;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 400px; /* 设置表单宽度 */
+}
+
+/* 表单标签样式 */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* 表单输入框样式 */
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 按钮样式 */
+button {
+    background-color: #FFA500; /* 按钮颜色改为亮橙色 */
+    color: white;
+    padding: 15px 30px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e69500; /* 悬停时的按钮颜色为较深的橙色 */
+}
+
+/* 链接样式 */
+a {
+    text-decoration: none;
+}

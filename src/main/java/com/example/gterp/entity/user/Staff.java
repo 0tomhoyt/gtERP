@@ -3,7 +3,6 @@ package com.example.gterp.entity.user;
 import jakarta.persistence.*;
 import java.util.List;
 import com.example.gterp.entity.contract.Contract;
-
 @Entity
 public class Staff extends User {
 
@@ -12,11 +11,35 @@ public class Staff extends User {
     private Long id;
 
     @OneToMany(mappedBy = "staff")
-    private List<Client> clients;  // 一个员工可以有多个客户
+    private List<Client> clients;
 
     @OneToMany(mappedBy = "staff")
-    private List<Contract> contracts;  // 一个员工可以有多个合同
+    private List<Contract> contracts;
 
-    // Getter和Setter方法
+    // Getter and Setter methods
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
+
+    public List<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
 }
-
