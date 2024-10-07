@@ -6,10 +6,6 @@ import com.example.gterp.entity.contract.Contract;
 @Entity
 public class Client extends User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(length = 250)
     private String description;
 
@@ -24,15 +20,6 @@ public class Client extends User {
     private String address;
 
     // Getter and Setter methods
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getDescription() {
         return description;

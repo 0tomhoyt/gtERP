@@ -1,6 +1,8 @@
 package com.example.gterp.entity.user;
 
 import jakarta.persistence.*;
+import java.util.List;
+
 @MappedSuperclass
 public abstract class User {
 
@@ -23,11 +25,22 @@ public abstract class User {
     @Column(length = 250)
     private String nickName;
 
-    @Column(length = 250)
-    private String role;
+
 
     @Column
     private String permission;
+
+    @Transient
+    private boolean _delete;
+
+    // Getter 和 Setter
+    public boolean isDelete() {
+        return _delete;
+    }
+
+    public void setDelete(boolean _delete) {
+        this._delete = _delete;
+    }
 
     // Getter and Setter methods
     public Long getId() {
@@ -78,13 +91,7 @@ public abstract class User {
         this.nickName = nickName;
     }
 
-    public String getRole() {
-        return role;
-    }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getPermission() {
         return permission;
@@ -94,3 +101,6 @@ public abstract class User {
         this.permission = permission;
     }
 }
+
+
+

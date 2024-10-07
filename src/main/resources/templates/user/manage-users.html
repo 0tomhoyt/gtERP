@@ -2,54 +2,88 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>管理用户</title>
-  <link rel="stylesheet" th:href="@{/css/manage-users.css}"> <!-- 引入独立的CSS文件 -->
+  <link rel="stylesheet" th:href="@{/css/manage-users.css}">
 </head>
 <body>
+<div th:if="${message}" class="alert alert-success">
+  <p th:text="${message}"></p>
+</div>
 
 <div class="container">
   <!-- 左侧：员工信息 -->
   <div class="column">
     <h2>员工列表</h2>
-    <form th:each="staff : ${staffList}" th:object="${staff}" th:action="@{/user/edit/staff}" method="post">
+    <form th:action="@{/user/edit/staff}" method="post" th:object="${staffListWrapper}">
       <table>
         <thead>
         <tr>
           <th>用户名</th>
+          <th>昵称</th>
           <th>角色</th>
-          <th>操作</th>
+          <th>删除</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td><input type="text" th:field="*{username}" /></td>
-          <td><input type="text" th:field="*{role}" /></td>
-          <td><button type="submit">保存修改</button></td>
+        <tr th:each="staff, staffStat : *{staffList}">
+          <td>
+            <!-- 绑定ID -->
+            <input type="hidden" th:field="*{staffList[__${staffStat.index}__].id}" />
+            <!-- 显示用户名，不可编辑 -->
+            <input type="hidden" th:field="*{staffList[__${staffStat.index}__].username}" />
+            <span th:text="*{staffList[__${staffStat.index}__].username}"></span>
+          </td>
+          <td>
+            <!-- 绑定昵称 -->
+            <input type="text" th:field="*{staffList[__${staffStat.index}__].nickName}" />
+          </td>
+          <td>
+            <!-- 绑定角色 -->
+            <input type="text" th:field="*{staffList[__${staffStat.index}__].role}" />
+          </td>
+          <td>
+            <!-- 删除复选框 -->
+            <input type="checkbox" th:field="*{staffList[__${staffStat.index}__].delete}" />
+          </td>
         </tr>
         </tbody>
       </table>
+      <button type="submit">保存修改</button>
     </form>
   </div>
 
   <!-- 右侧：客户信息 -->
   <div class="column">
     <h2>客户列表</h2>
-    <form th:each="client : ${clientList}" th:object="${client}" th:action="@{/user/edit/client}" method="post">
+    <form th:action="@{/user/edit/client}" method="post" th:object="${clientListWrapper}">
       <table>
         <thead>
         <tr>
           <th>用户名</th>
           <th>描述</th>
-          <th>操作</th>
+          <th>删除</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td><input type="text" th:field="*{username}" /></td>
-          <td><input type="text" th:field="*{description}" /></td>
-          <td><button type="submit">保存修改</button></td>
+        <tr th:each="client, clientStat : *{clientList}">
+          <td>
+            <!-- 绑定ID -->
+            <input type="hidden" th:field="*{clientList[__${clientStat.index}__].id}" />
+            <!-- 显示用户名，不可编辑 -->
+            <input type="hidden" th:field="*{clientList[__${clientStat.index}__].username}" />
+            <span th:text="*{clientList[__${clientStat.index}__].username}"></span>
+          </td>
+          <td>
+            <!-- 绑定描述 -->
+            <input type="text" th:field="*{clientList[__${clientStat.index}__].description}" />
+          </td>
+          <td>
+            <!-- 删除复选框 -->
+            <input type="checkbox" th:field="*{clientList[__${clientStat.index}__].delete}" />
+          </td>
         </tr>
         </tbody>
       </table>
+      <button type="submit">保存修改</button>
     </form>
   </div>
 </div>

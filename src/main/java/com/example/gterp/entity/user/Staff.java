@@ -3,12 +3,12 @@ package com.example.gterp.entity.user;
 import jakarta.persistence.*;
 import java.util.List;
 import com.example.gterp.entity.contract.Contract;
+
 @Entity
 public class Staff extends User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(length = 250)
+    private String role;
 
     @OneToMany(mappedBy = "staff")
     private List<Client> clients;
@@ -16,19 +16,19 @@ public class Staff extends User {
     @OneToMany(mappedBy = "staff")
     private List<Contract> contracts;
 
+
+
     // Getter and Setter methods
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public List<Client> getClients() {
         return clients;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setClients(List<Client> clients) {
@@ -43,3 +43,4 @@ public class Staff extends User {
         this.contracts = contracts;
     }
 }
+
