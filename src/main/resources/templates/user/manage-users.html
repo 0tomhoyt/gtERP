@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
 <head>
   <title>管理用户</title>
   <link rel="stylesheet" th:href="@{/css/manage-users.css}">
@@ -37,15 +37,21 @@
           </td>
           <td>
             <!-- 绑定昵称 -->
-            <input type="text" th:field="*{staffList[__${staffStat.index}__].nickName}" />
+            <label>
+              <input type="text" th:field="*{staffList[__${staffStat.index}__].nickName}" />
+            </label>
           </td>
           <td>
             <!-- 绑定角色 -->
-            <input type="text" th:field="*{staffList[__${staffStat.index}__].role}" />
+            <label>
+              <input type="text" th:field="*{staffList[__${staffStat.index}__].role}" />
+            </label>
           </td>
           <td>
             <!-- 删除复选框 -->
-            <input type="checkbox" th:field="*{staffList[__${staffStat.index}__].delete}" />
+            <label>
+              <input type="checkbox" th:field="*{staffList[__${staffStat.index}__].delete}" />
+            </label>
           </td>
         </tr>
         </tbody>
@@ -79,27 +85,35 @@
           </td>
           <td>
             <!-- 绑定昵称 -->
-            <input type="text" th:field="*{clientList[__${clientStat.index}__].nickName}" />
+            <label>
+              <input type="text" th:field="*{clientList[__${clientStat.index}__].nickName}" />
+            </label>
           </td>
           <td>
             <!-- 绑定描述 -->
-            <input type="text" th:field="*{clientList[__${clientStat.index}__].description}" />
+            <label>
+              <input type="text" th:field="*{clientList[__${clientStat.index}__].description}" />
+            </label>
           </td>
 
           <td>
             <!-- 使用 staffListWrapper.staffList -->
-            <select th:field="*{clientList[__${clientStat.index}__].staff.id}">
-              <option value="" disabled>请选择员工</option>
-              <option th:each="staff : ${staffListWrapper.staffList}"
-                      th:value="${staff.id}"
-                      th:text="${staff.nickName}"
-                      th:selected="${staff.id} == *{clientList[__${clientStat.index}__].staff.id}">
-              </option>
-            </select>
+            <label>
+              <select th:field="*{clientList[__${clientStat.index}__].staff.id}">
+                <option value="" disabled>请选择员工</option>
+                <option th:each="staff : ${staffListWrapper.staffList}"
+                        th:value="${staff.id}"
+                        th:text="${staff.nickName}"
+                        th:selected="${staff.id} == *{clientList[__${clientStat.index}__].staff.id}">
+                </option>
+              </select>
+            </label>
           </td>
           <td>
             <!-- 删除复选框 -->
-            <input type="checkbox" th:field="*{clientList[__${clientStat.index}__].delete}" />
+            <label>
+              <input type="checkbox" th:field="*{clientList[__${clientStat.index}__].delete}" />
+            </label>
           </td>
         </tr>
         </tbody>
