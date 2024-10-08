@@ -7,7 +7,7 @@
 </head>
 <body>
 <!-- 包含导航栏 -->
-<div th:insert="fragments/navbar :: navbar"></div>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
 <div class="container">
     <h1>创建新客户</h1>
     <form th:action="@{/user/new/client}" th:object="${client}" method="post">
@@ -32,7 +32,6 @@
         <label>客户地址:</label>
         <input type="text" th:field="*{address}" /><br/>
 
-        <button type="submit">创建客户</button>
         <!-- 员工选择下拉菜单 -->
         <label>选择员工:</label>
         <select th:field="*{staff.id}" required>

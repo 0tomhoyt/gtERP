@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Services</title>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<!-- Header Section -->
+<header>
+  <div class="header-container">
+    <h1>服务范围</h1>
+  </div>
+</header>
+
+<!-- Services Section -->
+<section class="services">
+  <div class="service">
+    <div class="service-description">
+      <h2>画册印刷</h2>
+      <p>商务印刷营销宣传的各类、标书装订、企业简介、各种报告、培训资料、会议资料、画册、VI/CI手册、名片、荣誉装订、说明书打印装订。</p>
+      <a href="#" class="learn-more">查看更多</a>
+    </div>
+    <img src="/images/gt1.jpg" alt="Service 1" class="service-image">
+  </div>
+
+  <div class="service">
+    <div class="service-description">
+      <h2>印刷设计</h2>
+      <p>采用高质量的纸张、国内外知名品牌，根据客户需求，定制印刷设计。专业提供设计定制服务，优质的印刷服务是我们的承诺。</p>
+      <a href="#" class="learn-more">查看更多</a>
+    </div>
+    <img src="/images/gt2.jpg" alt="Service 2" class="service-image">
+  </div>
+
+  <div class="service">
+    <div class="service-description">
+      <h2>印刷设备</h2>
+      <p>拥有世界领先的高速印刷机，能处理各种印刷需求。为客户提供一站式服务，从设计到印刷到设备使用都有全面保障。</p>
+      <a href="#" class="learn-more">查看更多</a>
+    </div>
+    <img src="/images/gt3.jpg" alt="Service 3" class="service-image">
+  </div>
+
+  <div class="service">
+    <div class="service-description">
+      <h2>包装设计</h2>
+      <p>我们有经验丰富的设计团队，致力于为客户提供高质量的包装设计服务，确保每一件产品都有吸引力且实用。</p>
+      <a href="#" class="learn-more">查看更多</a>
+    </div>
+    <img src="/images/gt4.jpg" alt="Service 4" class="service-image">
+  </div>
+</section>
+
+<!-- Footer Section -->
+<div th:insert="~{fragments/footer.html :: footer}"></div>
+</body>
+</html>

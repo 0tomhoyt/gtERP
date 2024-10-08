@@ -1,5 +1,6 @@
 package com.example.gterp.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 import com.example.gterp.entity.contract.Contract;
@@ -11,11 +12,23 @@ public class Staff extends User {
     private String role;
 
     @OneToMany(mappedBy = "staff")
+    @JsonIgnore
     private List<Client> clients;
 
-    @OneToMany(mappedBy = "staff")
-    private List<Contract> contracts;
-
+    //复制器
+    @Override
+    public void copyNonNullPropertiesFrom(User other) {
+        super.copyNonNullPropertiesFrom(other);
+        if (other instanceof Staff) {
+            Staff otherStaff = (Staff) other;
+            if (this.role == null && otherStaff.role != null) {
+                this.role = otherStaff.role;
+            }
+            if (this.clients == null && otherStaff.clients != null) {
+                this.clients = otherStaff.clients;
+            }
+        }
+    }
 
 
     // Getter and Setter methods
@@ -35,12 +48,5 @@ public class Staff extends User {
         this.clients = clients;
     }
 
-    public List<Contract> getContracts() {
-        return contracts;
-    }
-
-    public void setContracts(List<Contract> contracts) {
-        this.contracts = contracts;
-    }
 }
 

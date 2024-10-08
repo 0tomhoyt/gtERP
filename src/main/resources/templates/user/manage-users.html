@@ -7,7 +7,7 @@
 </head>
 <body>
 <!-- 包含导航栏 -->
-<div th:insert="fragments/navbar :: navbar"></div>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
 <div th:if="${message}" class="alert alert-success">
   <p th:text="${message}"></p>
 </div>
@@ -62,7 +62,9 @@
         <thead>
         <tr>
           <th>用户名</th>
+          <th>名称</th>
           <th>描述</th>
+          <th>所属员工</th>
           <th>删除</th>
         </tr>
         </thead>
@@ -76,8 +78,24 @@
             <span th:text="*{clientList[__${clientStat.index}__].username}"></span>
           </td>
           <td>
+            <!-- 绑定昵称 -->
+            <input type="text" th:field="*{clientList[__${clientStat.index}__].nickName}" />
+          </td>
+          <td>
             <!-- 绑定描述 -->
             <input type="text" th:field="*{clientList[__${clientStat.index}__].description}" />
+          </td>
+
+          <td>
+            <!-- 使用 staffListWrapper.staffList -->
+            <select th:field="*{clientList[__${clientStat.index}__].staff.id}">
+              <option value="" disabled>请选择员工</option>
+              <option th:each="staff : ${staffListWrapper.staffList}"
+                      th:value="${staff.id}"
+                      th:text="${staff.nickName}"
+                      th:selected="${staff.id} == *{clientList[__${clientStat.index}__].staff.id}">
+              </option>
+            </select>
           </td>
           <td>
             <!-- 删除复选框 -->
@@ -89,6 +107,8 @@
       <button type="submit">保存修改</button>
     </form>
   </div>
+
+
 </div>
 
 <!-- 引入JavaScript -->

@@ -8,7 +8,7 @@
 <body>
 
 <!-- 包含导航栏 -->
-<div th:insert="fragments/navbar :: navbar"></div>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
 <div class="container">
   <h1>创建新员工</h1>
   <form th:action="@{/user/new/staff}" th:object="${staff}" method="post">

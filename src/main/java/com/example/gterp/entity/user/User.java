@@ -1,7 +1,6 @@
 package com.example.gterp.entity.user;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @MappedSuperclass
 public abstract class User {
@@ -25,13 +24,40 @@ public abstract class User {
     @Column(length = 250)
     private String nickName;
 
-
-
     @Column
     private String permission;
 
     @Transient
     private boolean _delete;
+
+    // 添加软删除字段
+    @Column(name = "is_deleted",nullable = false)
+    private boolean isDeleted = false;
+
+    // 复制器
+    public void copyNonNullPropertiesFrom(User other) {
+        if (other == null) {
+            return;
+        }
+        if (this.username == null && other.username != null) {
+            this.username = other.username;
+        }
+        if (this.password == null && other.password != null) {
+            this.password = other.password;
+        }
+        if (this.email == null && other.email != null) {
+            this.email = other.email;
+        }
+        if (this.phoneNumber == null && other.phoneNumber != null) {
+            this.phoneNumber = other.phoneNumber;
+        }
+        if (this.nickName == null && other.nickName != null) {
+            this.nickName = other.nickName;
+        }
+        if (this.permission == null && other.permission != null) {
+            this.permission = other.permission;
+        }
+    }
 
     // Getter 和 Setter
     public boolean isDelete() {
@@ -41,6 +67,16 @@ public abstract class User {
     public void setDelete(boolean _delete) {
         this._delete = _delete;
     }
+
+    // 添加 isDeleted 的 Getter 和 Setter
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
 
     // Getter and Setter methods
     public Long getId() {

@@ -1,0 +1,90 @@
+/* 页脚样式 */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+}
+
+/* 页脚的内容布局 */
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* 左侧部分 - LOGO */
+.footer-left {
+    display: flex;
+    align-items: center;
+}
+
+.footer-logo img {
+    max-width: 60px; /* 图片大小调整 */
+    height: auto;
+    margin-right: 20px; /* 增加一些间距 */
+}
+
+/* 右侧部分 - 导航链接 */
+.footer-right {
+    display: flex;
+}
+
+.footer-nav {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.footer-nav a:hover {
+    text-decoration: underline;
+}
+
+/* 页脚底部的版权信息 */
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #bbb;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* 响应式设计: 小屏幕时调整布局 */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-left,
+    .footer-right {
+        margin-bottom: 15px;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+    }
+
+    .footer-nav a {
+        margin: 10px 0;
+    }
+}

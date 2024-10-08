@@ -84,53 +84,43 @@ public class UserController {
     // 显示所有员工和客户的信息
     @GetMapping("/manage")
     public String showStaffAndClients(Model model) {
-        List<Staff> staffList = staffRepository.findAll();
-        List<Client> clientList = clientRepository.findAll();
+        List<Staff> staffList = staffRepository.findAllActiveStaff();
+        List<Client> clientList = clientRepository.findAllActiveClients();
 
         StaffListWrapper staffListWrapper = new StaffListWrapper();
         ClientListWrapper clientListWrapper = new ClientListWrapper();
-        // 确保 staffList 和 clientList 不为空
-        if (staffList.isEmpty()) {
-            staffListWrapper.setStaffList(new ArrayList<Staff>());
-        } else {
-            staffListWrapper.setStaffList(staffList);
-        }
-
-        if (clientList.isEmpty()) {
-            clientListWrapper.setClientList(new ArrayList<Client>());
-        } else {
-            clientListWrapper.setClientList(clientList);
-        }
+        staffListWrapper.setStaffList(staffList);
+        clientListWrapper.setClientList(clientList);
 
         model.addAttribute("staffListWrapper", staffListWrapper);
         model.addAttribute("clientListWrapper", clientListWrapper);
 
+        // 如果需要 staffList，可以从 staffListWrapper 中获取
+        model.addAttribute("staffList", staffListWrapper.getStaffList());
 
         return "user/manage-users"; // 返回管理页面
-
     }
+
+
 
     @PostMapping("/edit/staff")
     public String editStaff(@ModelAttribute("staffListWrapper") StaffListWrapper staffListWrapper, RedirectAttributes redirectAttributes) {
         List<Staff> staffList = staffListWrapper.getStaffList();
 
-        Iterator<Staff> iterator = staffList.iterator();
-        while (iterator.hasNext()) {
-            Staff staff = iterator.next();
+        for (Staff staff : staffList) {
             if (staff.isDelete()) {
-                staffRepository.deleteById(staff.getId());
-                iterator.remove();
+                Staff existingStaff = staffRepository.findById(staff.getId()).orElse(null);
+                if (existingStaff != null) {
+                    existingStaff.setDeleted(true);
+                    staffRepository.save(existingStaff);
+                }
             } else {
                 // Retrieve the existing staff from the database
                 Staff existingStaff = staffRepository.findById(staff.getId()).orElse(null);
                 if (existingStaff != null) {
                     // Preserve the password
-                    staff.setPassword(existingStaff.getPassword());
-                    // Save the updated staff
+                    staff.copyNonNullPropertiesFrom(existingStaff);
                     staffRepository.save(staff);
-                } else {
-                    // Handle the case where the staff does not exist
-                    // You might want to log a warning or throw an exception
                 }
             }
         }
@@ -140,26 +130,42 @@ public class UserController {
     }
 
 
+
     @PostMapping("/edit/client")
     public String editClient(@ModelAttribute("clientListWrapper") ClientListWrapper clientListWrapper, RedirectAttributes redirectAttributes) {
         List<Client> clientList = clientListWrapper.getClientList();
 
-        Iterator<Client> iterator = clientList.iterator();
-        while (iterator.hasNext()) {
-            Client client = iterator.next();
+        for (Client client : clientList) {
             if (client.isDelete()) {
-                clientRepository.deleteById(client.getId());
-                iterator.remove();
+                Client existingClient = clientRepository.findById(client.getId()).orElse(null);
+                if (existingClient != null) {
+                    existingClient.setDeleted(true);
+                    clientRepository.save(existingClient);
+                }
             } else {
                 // Retrieve the existing client from the database
                 Client existingClient = clientRepository.findById(client.getId()).orElse(null);
                 if (existingClient != null) {
                     // Preserve the password or other non-editable fields
-                    client.setPassword(existingClient.getPassword());
+                    client.copyNonNullPropertiesFrom(existingClient);
+
+                    // 设置 Staff 属性
+                    if (client.getStaff() != null && client.getStaff().getId() != null) {
+                        Staff staff = staffRepository.findById(client.getStaff().getId()).orElse(null);
+                        if (staff != null) {
+                            client.setStaff(staff);
+                        } else {
+                            // 如果未找到对应的 Staff，返回错误信息
+                            redirectAttributes.addFlashAttribute("message", "未找到 ID 为 " + client.getStaff().getId() + " 的员工。");
+                            return "redirect:/user/manage";
+                        }
+                    } else {
+                        // 如果未选择 Staff，保留原有的 Staff
+                        client.setStaff(existingClient.getStaff());
+                    }
+
                     // Save the updated client
                     clientRepository.save(client);
-                } else {
-                    // Handle the case where the client does not exist
                 }
             }
         }
@@ -168,18 +174,32 @@ public class UserController {
         return "redirect:/user/manage";
     }
 
-    //    删除员工和客户
+
     @PostMapping("/delete/staff/{id}")
     public String deleteStaff(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        staffRepository.deleteById(id);
-        redirectAttributes.addFlashAttribute("message", "员工删除成功！");
+        Staff staff = staffRepository.findById(id).orElse(null);
+        if (staff != null) {
+            staff.setDeleted(true);
+            staffRepository.save(staff);
+            redirectAttributes.addFlashAttribute("message", "员工删除成功！");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "未找到指定的员工。");
+        }
         return "redirect:/user/manage";
     }
+
     @PostMapping("/delete/client/{id}")
     public String deleteClient(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        clientRepository.deleteById(id);
-        redirectAttributes.addFlashAttribute("message", "客户删除成功！");
+        Client client = clientRepository.findById(id).orElse(null);
+        if (client != null) {
+            client.setDeleted(true);
+            clientRepository.save(client);
+            redirectAttributes.addFlashAttribute("message", "客户删除成功！");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "未找到指定的客户。");
+        }
         return "redirect:/user/manage";
     }
+
 
 }

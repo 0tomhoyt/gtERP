@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>合同列表</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<div class="container">
+  <h1>合同列表</h1>
+
+  <!-- 筛选表单 -->
+  <form th:action="@{/contracts}" method="get">
+    <!-- 选择员工 -->
+    <label>选择员工:</label>
+    <select name="staffId" id="staffSelect">
+      <option value="">-- 全部员工 --</option>
+      <option th:each="staff : ${staffList}"
+              th:value="${staff.id}"
+              th:text="${staff.nickName}"
+              th:selected="${staff.id} == ${selectedStaffId}">
+      </option>
+    </select>
+
+    <!-- 选择客户 -->
+    <label>选择客户:</label>
+    <select name="clientId" id="clientSelect">
+      <option value="">-- 全部客户 --</option>
+      <option th:each="client : ${clientList}"
+              th:value="${client.id}"
+              th:text="${client.nickName}"
+              th:selected="${client.id} == ${selectedClientId}">
+      </option>
+    </select>
+
+    <button type="submit">筛选</button>
+  </form>
+
+  <!-- 合同列表 -->
+  <table>
+    <thead>
+    <tr>
+      <th>合同号</th>
+      <th>创建日期</th>
+      <th>客户</th>
+      <th>员工</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="contract : ${contracts}">
+      <td th:text="${contract.contractNumber}"></td>
+      <td th:text="${contract.creationDate}"></td>
+      <td th:text="${contract.client.nickName}"></td>
+      <td th:text="${contract.client.staff.nickName}"></td>
+      <td>
+        <a th:href="@{'/contracts/edit/' + ${contract.id}}">编辑</a>
+        <!-- 其他操作，如删除等 -->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 动态加载客户列表的脚本（可选） -->
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var clientData = /*[[${clientList}]]*/ [];
+  var selectedClientId = /*[[${selectedClientId}]]*/ null;
+
+  function updateClientOptions() {
+    var staffId = document.getElementById('staffSelect').value;
+    var clientSelect = document.getElementById('clientSelect');
+    clientSelect.innerHTML = '<option value="">-- 全部客户 --</option>';
+
+    var filteredClients = clientData;
+    if (staffId) {
+      filteredClients = clientData.filter(function(client) {
+        return client.staff.id == staffId;
+      });
+    }
+
+    filteredClients.forEach(function(client) {
+      var option = document.createElement('option');
+      option.value = client.id;
+      option.text = client.nickName;
+      if (client.id == selectedClientId) {
+        option.selected = true;
+      }
+      clientSelect.add(option);
+    });
+  }
+
+  document.getElementById('staffSelect').addEventListener('change', function() {
+    updateClientOptions();
+  });
+
+  // 初始化客户下拉列表
+  updateClientOptions();
+  /*]]>*/
+</script>
+
+</body>
+</html>
